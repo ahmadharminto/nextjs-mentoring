@@ -61,7 +61,7 @@ const Header = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <button className="relative bg-primary text-white px-[43px] py-[19px] transition-colors duration-200 hover:text-link hover:opacity-75">
+                            <button className="relative bg-primary text-white px-[43px] py-[19px] transition-colors duration-200 hover:text-link hover:opacity-90">
                                 Log in
                             </button>
                         </li>

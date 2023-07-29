@@ -1,6 +1,5 @@
 import Layout from "@/lib/layout";
 import { fontSans } from "@/lib/styles/fonts";
-import { cn } from "@/lib/utils";
 import "@/lib/styles/globals.css";
 
 export const metadata = {
@@ -14,10 +13,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en">
-            <body
-                className={cn("min-h-screen", fontSans.variable)}
-                suppressHydrationWarning={true}>
+        <html lang="en" className={fontSans.className}>
+            <body className="min-h-screen" suppressHydrationWarning={true}>
                 <Layout>{children}</Layout>
             </body>
         </html>
