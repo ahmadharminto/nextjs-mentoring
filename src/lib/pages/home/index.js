@@ -3,11 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useRef } from "react";
+import { FaRegHeart } from "react-icons/fa";
 
 import Container from "@/lib/components/container";
 
 const Home = () => {
-    const timeStamp = new Date().getTime();
     const testimoniRef = useRef({});
     const [testimoniScroll, setTestimoniScroll] = useState({
         isScrolling: false,
@@ -34,10 +34,23 @@ const Home = () => {
     function onTestimoniMouseMove(e) {
         const { clientX, scrollX } = testimoniScroll;
         if (testimoniScroll.isScrolling) {
-            testimoniRef.current.scrollLeft = scrollX + e.clientX - clientX;
+            let _scrollX = scrollX + e.clientX - clientX;
+            if (_scrollX < 0) {
+                _scrollX = 0;
+            }
+            if (
+                _scrollX >
+                testimoniRef.current.scrollWidth -
+                    testimoniRef.current.clientWidth
+            ) {
+                _scrollX =
+                    testimoniRef.current.scrollWidth -
+                    testimoniRef.current.clientWidth;
+            }
+            testimoniRef.current.scrollLeft = _scrollX;
             setTestimoniScroll({
                 ...testimoniScroll,
-                scrollX: scrollX + e.clientX - clientX,
+                scrollX: _scrollX,
                 clientX: e.clientX,
             });
         }
@@ -127,14 +140,20 @@ const Home = () => {
                     </div>
                     <div className="section-content grid grid-cols-3 gap-[30px]">
                         <div className="card flex flex-col">
-                            <div className="image">
+                            <div className="image relative">
                                 <Image
-                                    src={`/orange-house.png?${timeStamp}`}
+                                    src="/orange-house.png"
                                     alt="logo"
                                     width={370}
                                     height={350}
                                     priority
                                 />
+                                <div className="absolute left-0 bottom-0 bg-white p-[16px]">
+                                    <span className="text-primary">3 Room</span>
+                                </div>
+                                <button className="absolute right-[24px] top-[24px] bg-white rounded-full text-center p-[10px]">
+                                    <FaRegHeart className="w-[20px] h-[20px] text-primary" />
+                                </button>
                             </div>
                             <p className="title text-black text-[32px] font-medium">
                                 Orange House
@@ -145,14 +164,20 @@ const Home = () => {
                             </p>
                         </div>
                         <div className="card flex flex-col">
-                            <div className="image">
+                            <div className="image relative">
                                 <Image
-                                    src={`/white-house.png?${timeStamp}`}
+                                    src="/white-house.png"
                                     alt="logo"
                                     width={370}
                                     height={350}
                                     priority
                                 />
+                                <div className="absolute left-0 bottom-0 bg-white p-[16px]">
+                                    <span className="text-primary">2 Room</span>
+                                </div>
+                                <button className="absolute right-[24px] top-[24px] bg-white rounded-full text-center p-[10px]">
+                                    <FaRegHeart className="w-[20px] h-[20px] text-primary" />
+                                </button>
                             </div>
                             <p className="title text-black text-[32px] font-medium">
                                 White House
@@ -163,14 +188,20 @@ const Home = () => {
                             </p>
                         </div>
                         <div className="card flex flex-col">
-                            <div className="image">
+                            <div className="image relative">
                                 <Image
-                                    src={`/green-house.png?${timeStamp}`}
+                                    src="/green-house.png"
                                     alt="logo"
                                     width={370}
                                     height={350}
                                     priority
                                 />
+                                <div className="absolute left-0 bottom-0 bg-white p-[16px]">
+                                    <span className="text-primary">2 Room</span>
+                                </div>
+                                <button className="absolute right-[24px] top-[24px] bg-white rounded-full text-center p-[10px]">
+                                    <FaRegHeart className="w-[20px] h-[20px] text-primary" />
+                                </button>
                             </div>
                             <p className="title text-black text-[32px] font-medium">
                                 Green House
@@ -183,7 +214,7 @@ const Home = () => {
                     </div>
                 </Container>
             </section>
-            <section className="testimonial">
+            <section className="testimonial mb-[128px]">
                 <Container>
                     <div className="section-title flex gap-10 place-items-center mb-[50px]">
                         <h2 className="text-black text-[40px] font-medium tracking-[0.4px]">
@@ -208,19 +239,105 @@ const Home = () => {
                             onMouseDown={onTestimoniMouseDown}
                             onMouseUp={onTestimoniMouseUp}
                             onMouseMove={onTestimoniMouseMove}
-                            className="flex overflow-x-hidden pb-1 cursor-grab">
+                            className="flex overflow-x-scroll hide-scroll-bar pb-1 cursor-grab">
                             <div className="flex flex-nowrap gap-[30px]">
                                 <div className="inline-block">
-                                    <div className="w-[570px] h-[400px] shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"></div>
+                                    <div className="w-[570px] h-[504px] shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col">
+                                        <div className="image mb-[32px] relative">
+                                            <Image
+                                                src="/testi-1.png"
+                                                alt="testi-1"
+                                                width={570}
+                                                height={400}
+                                                priority
+                                            />
+                                            <div className="absolute left-0 bottom-0 bg-white p-[16px]">
+                                                <span className="text-primary">
+                                                    Jone Doe
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="w-[424px]">
+                                            <p className="text-black pl-2 text-[24px] font-normal">
+                                                I am very satisfied buying a
+                                                house here because it is fast
+                                                and easy
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="inline-block">
-                                    <div className="w-[570px] h-[400px] shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"></div>
+                                    <div className="w-[570px] h-[504px] shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col">
+                                        <div className="image mb-[32px] relative">
+                                            <Image
+                                                src="/testi-2.png"
+                                                alt="testi-2"
+                                                width={570}
+                                                height={400}
+                                                priority
+                                            />
+                                            <div className="absolute left-0 bottom-0 bg-white p-[16px]">
+                                                <span className="text-primary">
+                                                    Angel Doe
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="w-[424px]">
+                                            <p className="text-black pl-2 text-[24px] font-normal">
+                                                Buying a house here is very
+                                                cheap and high quality
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="inline-block">
-                                    <div className="w-[570px] h-[400px] shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"></div>
+                                    <div className="w-[570px] h-[504px] shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col">
+                                        <div className="image mb-[32px] relative">
+                                            <Image
+                                                src="/testi-1.png"
+                                                alt="testi-1"
+                                                width={570}
+                                                height={400}
+                                                priority
+                                            />
+                                            <div className="absolute left-0 bottom-0 bg-white p-[16px]">
+                                                <span className="text-primary">
+                                                    Jone Doe
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="w-[424px]">
+                                            <p className="text-black pl-2 text-[24px] font-normal">
+                                                I am very satisfied buying a
+                                                house here because it is fast
+                                                and easy
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="inline-block">
-                                    <div className="w-[570px] h-[400px] shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"></div>
+                                    <div className="w-[570px] h-[504px] shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col">
+                                        <div className="image mb-[32px] relative">
+                                            <Image
+                                                src="/testi-2.png"
+                                                alt="testi-2"
+                                                width={570}
+                                                height={400}
+                                                priority
+                                            />
+                                            <div className="absolute left-0 bottom-0 bg-white p-[16px]">
+                                                <span className="text-primary">
+                                                    Angel Doe
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="w-[424px]">
+                                            <p className="text-black pl-2 text-[24px] font-normal">
+                                                Buying a house here is very
+                                                cheap and high quality
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -234,6 +351,28 @@ const Home = () => {
                             onClick={() => scroll(570)}>
                             {">"}
                         </div>
+                    </div>
+                </Container>
+            </section>
+            <section className="latest-blog">
+                <Container>
+                    <div className="section-title flex gap-10 place-items-center mb-[50px]">
+                        <h2 className="text-black text-[40px] font-medium tracking-[0.4px]">
+                            Always check our <br />
+                            latest blog
+                        </h2>
+                        <div className="flex-1"></div>
+                        <div>
+                            <Link
+                                href="/"
+                                className="text-[24px] text-black underline">
+                                View all
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="section-content grid grid-cols-2 gap-[30px]">
+                        <div className="featured-blog"></div>
+                        <div className="latest-blog"></div>
                     </div>
                 </Container>
             </section>
