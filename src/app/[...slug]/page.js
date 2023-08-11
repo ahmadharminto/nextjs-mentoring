@@ -1,4 +1,4 @@
-import SearchResultPage from "@/lib/pages/srp";
+import SearchResultPage from "@/lib/pages/search";
 
 const SRP = (props) => {
     return <SearchResultPage {...props} />;

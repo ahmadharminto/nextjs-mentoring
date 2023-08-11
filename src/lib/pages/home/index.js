@@ -2,18 +2,23 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { FaRegHeart } from "react-icons/fa";
 
 import Container from "@/lib/components/container";
 
 const Home = () => {
     const testimoniRef = useRef({});
-    const [testimoniScroll, setTestimoniScroll] = useState({
+    const testimoniScrollRef = useRef({
         isScrolling: false,
         clientX: 0,
         scrollX: 0,
     });
+    // const [testimoniScroll, setTestimoniScroll] = useState({
+    //     isScrolling: false,
+    //     clientX: 0,
+    //     scrollX: 0,
+    // });
     function scroll(x) {
         testimoniRef.current?.scrollBy({
             top: 0,
@@ -22,37 +27,39 @@ const Home = () => {
         });
     }
     function onTestimoniMouseDown(e) {
-        setTestimoniScroll({
-            ...testimoniScroll,
-            isScrolling: true,
-            clientX: e.clientX,
-        });
+        // setTestimoniScroll({
+        //     ...testimoniScroll,
+        //     isScrolling: true,
+        //     clientX: e.clientX,
+        // });
+        testimoniScrollRef.current.isScrolling = true;
+        testimoniScrollRef.current.clientX = e.clientX;
     }
     function onTestimoniMouseUp() {
-        setTestimoniScroll({ ...testimoniScroll, isScrolling: false });
+        // setTestimoniScroll({ ...testimoniScroll, isScrolling: false });
+        testimoniScrollRef.current.isScrolling = false;
     }
     function onTestimoniMouseMove(e) {
-        const { clientX, scrollX } = testimoniScroll;
-        if (testimoniScroll.isScrolling) {
+        const { clientX, scrollX } = testimoniScrollRef.current;
+        if (testimoniScrollRef.current?.isScrolling) {
+            const maxScroll =
+                testimoniRef.current?.scrollWidth -
+                testimoniRef.current?.clientWidth;
             let _scrollX = scrollX + e.clientX - clientX;
             if (_scrollX < 0) {
                 _scrollX = 0;
             }
-            if (
-                _scrollX >
-                testimoniRef.current.scrollWidth -
-                    testimoniRef.current.clientWidth
-            ) {
-                _scrollX =
-                    testimoniRef.current.scrollWidth -
-                    testimoniRef.current.clientWidth;
+            if (_scrollX > maxScroll) {
+                _scrollX = maxScroll;
             }
             testimoniRef.current.scrollLeft = _scrollX;
-            setTestimoniScroll({
-                ...testimoniScroll,
-                scrollX: _scrollX,
-                clientX: e.clientX,
-            });
+            // setTestimoniScroll({
+            //     ...testimoniScroll,
+            //     scrollX: _scrollX,
+            //     clientX: e.clientX,
+            // });
+            testimoniScrollRef.current.scrollX = _scrollX;
+            testimoniScrollRef.current.clientX = e.clientX;
         }
     }
     return (
