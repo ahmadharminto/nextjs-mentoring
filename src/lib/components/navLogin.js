@@ -33,21 +33,23 @@ const NavLogin = () => {
         }
         getUser();
     }, [pathname]);
-    if (user) {
-        return (
-            <button
-                onClick={logout}
-                className="relative bg-primary text-white px-[43px] py-[19px] transition-colors duration-200 hover:text-link hover:opacity-90">
-                Log out
-            </button>
-        );
-    }
+
     return (
-        <Link
-            href="/login"
-            className="relative bg-primary text-white px-[43px] py-[19px] transition-colors duration-200 hover:text-link hover:opacity-90">
-            Log in
-        </Link>
+        <>
+            {user ? (
+                <button
+                    onClick={logout}
+                    className="relative bg-primary text-white px-[43px] py-[19px] transition-colors duration-200 hover:text-link hover:opacity-90">
+                    Log out
+                </button>
+            ) : (
+                <Link
+                    href="/login"
+                    className="relative bg-primary text-white px-[43px] py-[19px] transition-colors duration-200 hover:text-link hover:opacity-90">
+                    Log in
+                </Link>
+            )}
+        </>
     );
 };
 
