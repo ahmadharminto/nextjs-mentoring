@@ -1,3 +1,3 @@
-import AuthForm from "@/lib/pages/auth/form";
+import Login from "@/lib/pages/auth/login";
 
-export default AuthForm;
+export default Login;

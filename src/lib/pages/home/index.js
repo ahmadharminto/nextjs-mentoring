@@ -348,16 +348,16 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                        <div
+                        <button
                             className="absolute left-0 top-[50%] translate-y-[50%] cursor-pointer"
                             onClick={() => scroll(-570)}>
                             {"<"}
-                        </div>
-                        <div
+                        </button>
+                        <button
                             className="absolute right-0 top-[50%] translate-y-[50%] cursor-pointer"
                             onClick={() => scroll(570)}>
                             {">"}
-                        </div>
+                        </button>
                     </div>
                 </Container>
             </section>

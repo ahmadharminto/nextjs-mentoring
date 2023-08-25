@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 import Container from "@/lib/components/container";
 import NavLink from "@/lib/components/navLink";
+import NavLogin from "@/lib/components/navLogin";
 
 const Header = () => {
     const pathname = usePathname();
@@ -61,9 +62,7 @@ const Header = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <button className="relative bg-primary text-white px-[43px] py-[19px] transition-colors duration-200 hover:text-link hover:opacity-90">
-                                Log in
-                            </button>
+                            <NavLogin />
                         </li>
                     </ul>
                 </nav>
